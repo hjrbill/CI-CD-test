@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  hello-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8888:8888"
+    stdin_open: true
+    tty: true
