@@ -22,6 +22,8 @@ jobs:
       
   build-and-push:
     runs-on: ubuntu-latest
+    needs: Explore-GitHub-Actions
+    if: ${{ success() }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,3 +53,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: hjrbill/test:latest
+
+      - name: Webhook
+        run: |
+            echo "send to webhook"
+            curl --location --request GET '${{ secrets.WEBHOOK_URL }}'
